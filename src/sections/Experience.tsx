@@ -19,7 +19,7 @@ export default function Experience() {
             )}
             <h3 className="contentexperience__role">{item.role}</h3>
             <h5 className="contentexperience__company">
-              {item.company} · {item.startDate} – {item.endDate}
+              {item.company} · {item.startDate ? `${item.startDate} – ${item.endDate}` : item.endDate}
             </h5>
             <ul className="contentexperience__bullets">
               {item.bullets.map((bullet) => (
