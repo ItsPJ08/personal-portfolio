@@ -1,4 +1,4 @@
-const RESUME_URL = '/Prabjot-Pannu-Resume-copy.pdf';
+const RESUME_URL = '/Prabjot-Pannu-Resume.pdf';
 
 export default function Resume() {
   return (
