@@ -19,7 +19,7 @@ export const experience: ExperienceItem[] = [
     role: 'Associate Software Developer',
     startDate: 'August 2026',
     endDate: 'Present',
-    bullets: ['Developed web applications for clients around the Gilroy, Watsonville, and Salinas areas. Worked with a team of developers to create and maintain web applications using tools like React, HTML, CSS, and JavaScript.'],
+    bullets: ['Developed web applications for clients around the Gilroy, Watsonville, and Salinas areas. Worked with a team of developers to create and maintain web applications using tools like React, HTML, CSS, JavaScript, TypeScript and backend technologies like Node.js, Express, etc. Also worked with clients to understand their needs and provide solutions. '],
   },
   {
     image: graduation,
