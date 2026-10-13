@@ -3,7 +3,9 @@ import graduation from '../assets/graduation.jpg';
 import googleCert from '../assets/GoogleCert.png';
 
 export type ExperienceItem = {
-  image?: string; 
+  image?: string;
+  // Use 'contain' for logos so they aren't cropped
+  imageFit?: 'cover' | 'contain';
   company: string;
   role: string;
   startDate?: string;
@@ -15,11 +17,12 @@ export type ExperienceItem = {
 export const experience: ExperienceItem[] = [
   {
     image: digitalnest,
+    imageFit: 'contain',
     company: 'Digital Nest',
     role: 'Associate Software Developer',
     startDate: 'August 2026',
     endDate: 'Present',
-    bullets: ['Developed web applications for clients around the Gilroy, Watsonville, and Salinas areas. Worked with a team of developers to create and maintain web applications using tools like React, HTML, CSS, JavaScript, TypeScript and backend technologies like Node.js, Express, etc. Also worked with clients to understand their needs and provide solutions. '],
+    bullets: ['Build and maintain full-stack web applications for local businesses around Gilroy, Watsonville, and Salinas, as well as for internal Digital Nest projects, working with React, JavaScript, Node.js, WordPress, and SQL. I turn client requirements into responsive, easy-to-use interfaces and take features from implementation through testing and debugging. Day to day, I work closely with designers, fellow developers, and stakeholders to ship solutions that span both the frontend and backend.'],
   },
   {
     image: graduation,

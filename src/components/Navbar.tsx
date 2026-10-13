@@ -1,49 +1,62 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import { Link } from 'react-router-dom';
-import githubLogo from '../assets/github.png';
-import linkedinLogo from '../assets/linkedin.png';
+import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import SocialLinks from './SocialLinks';
+import { CloseIcon, MenuIcon } from './Icons';
+
+const links = [
+  { to: '/', label: 'Home' },
+  { to: '/#projects', label: 'Projects' },
+  { to: '/walkthrough', label: 'Walkthrough' },
+  { to: '/resume', label: 'Resume' },
+  { to: '/contact', label: 'Contact' },
+];
 
 export default function AppNavbar() {
-    return (
-<Navbar expand="lg" variant="dark" className="bg-dark">
-      <Container fluid>
-        <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: '100px' }}
-            navbarScroll
-          >
-            <Nav.Link as={Link} to="/">Home</Nav.Link>
-            <Nav.Link as={Link} to="/#projects">Github Projects</Nav.Link>
-            <Nav.Link as={Link} to="/walkthrough">Walkthrough</Nav.Link>
-            <Nav.Link as={Link} to="/contact">
-              Contact
-            </Nav.Link>
+  const { pathname, hash } = useLocation();
+  const [open, setOpen] = useState(false);
 
-            <Nav.Link as={Link} to="/resume">Resume</Nav.Link>
-          </Nav>
-          <Nav className="ms-auto my-2 my-lg-0 align-items-center">
-            <Nav.Link
-              href="https://www.linkedin.com/in/prabjot-pannu-b93955328/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src={linkedinLogo} alt="LinkedIn" width="28" height="28" />
-            </Nav.Link>
-            <Nav.Link
-              href="https://github.com/ItsPJ08"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src={githubLogo} alt="GitHub" width="28" height="28" />
-            </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+  const isActive = (to: string) => {
+    const [path, linkHash = ''] = to.split('#');
+    return pathname === path && hash === (linkHash ? `#${linkHash}` : '');
+  };
 
-);
+  return (
+    <header className="nav">
+      <div className="container nav__inner">
+        <Link to="/" className="nav__brand" onClick={() => setOpen(false)}>
+          <span className="nav__logo">PP</span>
+          Prabjot Pannu
+        </Link>
+
+        <button
+          className="nav__toggle"
+          type="button"
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
+          aria-controls="nav-menu"
+          onClick={() => setOpen((o) => !o)}
+        >
+          {open ? <CloseIcon /> : <MenuIcon />}
+        </button>
+
+        <nav id="nav-menu" className={`nav__menu ${open ? 'nav__menu--open' : ''}`}>
+          <ul className="nav__links">
+            {links.map((link) => (
+              <li key={link.to}>
+                <Link
+                  to={link.to}
+                  className={`nav__link ${isActive(link.to) ? 'nav__link--active' : ''}`}
+                  aria-current={isActive(link.to) ? 'page' : undefined}
+                  onClick={() => setOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <SocialLinks className="nav__social" />
+        </nav>
+      </div>
+    </header>
+  );
 }

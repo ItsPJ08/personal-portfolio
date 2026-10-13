@@ -1,57 +1,53 @@
+import { Link } from 'react-router-dom';
 import { projects } from '../data/projects';
 import Reveal from '../components/Reveal';
+import { ArrowRightIcon, ArrowUpRightIcon, CodeIcon } from '../components/Icons';
 
 export default function Projects() {
   return (
-    <div className="contentprojects" id="projects">
-      <Reveal>
-        <h1 className="contentprojects__header"><b>Projects</b></h1>
-      </Reveal>
-      {projects.map((project) => (
-        <Reveal key={project.title}>
-          <div className="contentprojects__card">
-            {project.image && (
-              project.github ? (
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`View ${project.title} on GitHub`}
-                >
-                  <img className="contentprojects__image"
-                    src={project.image}
-                    alt={project.title}
-                  />
-                </a>
-              ) : (
-                <img className="contentprojects__image"
-                  src={project.image}
-                  alt={project.title}
-                />
-              )
-            )}
-            <h3 className="contentprojects__title">{project.title}</h3>
-            <p className="contentprojects__description">{project.description}</p>
-            <div className="contentprojects__tags">
-              {project.tags.map((tag) => (
-                <span className="contentprojects__tag" key={tag}>
-                  <b>Tools:</b> {tag}
-                </span>
-              ))}
-            </div>
-            {project.github && (
-              <a
-                className="contentprojects__link"
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                View on GitHub
-              </a>
-            )}
-          </div>
+    <section className="section" id="projects">
+      <div className="container">
+        <Reveal className="section__head">
+          <p className="eyebrow">Selected work</p>
+          <h2 className="section__title">Projects</h2>
         </Reveal>
-      ))}
-    </div>
+        <div className="projects">
+          {projects.map((project, i) => (
+            <Reveal key={project.title} delay={i * 80}>
+              <article className="card card--hover project">
+                <div className="project__top">
+                  <span className="project__icon"><CodeIcon /></span>
+                  {project.github && <ArrowUpRightIcon className="project__arrow" />}
+                </div>
+                <h3 className="project__title">
+                  {project.github ? (
+                    <a href={project.github} target="_blank" rel="noopener noreferrer">
+                      {project.title}
+                    </a>
+                  ) : (
+                    project.title
+                  )}
+                </h3>
+                <p className="project__description">{project.description}</p>
+                <p className="project__impact">
+                  <span className="project__impact-label">My impact</span>
+                  {project.impact}
+                </p>
+                {project.demo && (
+                  <Link to={project.demo} className="project__demo">
+                    Watch demo <ArrowRightIcon className="btn__icon" />
+                  </Link>
+                )}
+                <ul className="project__tags" aria-label="Tools used">
+                  {project.tags.map((tag) => (
+                    <li className="tag" key={tag}>{tag}</li>
+                  ))}
+                </ul>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }

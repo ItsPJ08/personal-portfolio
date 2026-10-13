@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 import AppNavbar from './components/Navbar';
+import Footer from './components/Footer';
 import Header from './sections/Header';
 import Projects from './sections/Projects';
 import Experience from './sections/Experience';
@@ -29,23 +30,24 @@ function App() {
     <>
       <AppNavbar />
       <ScrollToHash />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <Header />
-              <hr className="linebreak"></hr>
-              <Experience />
-              <hr className="linebreak"></hr>
-              <Projects />
-            </>
-          }
-        />
-        <Route path="/walkthrough" element={<Walkthrough />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/resume" element={<Resume />} />
-      </Routes>
+      <main className="main">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Header />
+                <Experience />
+                <Projects />
+              </>
+            }
+          />
+          <Route path="/walkthrough" element={<Walkthrough />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/resume" element={<Resume />} />
+        </Routes>
+      </main>
+      <Footer />
     </>
   );
 }
